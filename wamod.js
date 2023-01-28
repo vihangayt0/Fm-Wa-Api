@@ -1,5 +1,8 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
+const port = process.env.PORT || 3000;
+const express = require('express');
+const app = express()
 
 async function mods() {
 	return new Promise((resolve, reject) => {
@@ -25,4 +28,7 @@ async function mods() {
     })
 }
 
-module.exports = { mods }
+app.get('/', async (req, res) => {
+let dats = await mods()
+        res.send(dats)})
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
