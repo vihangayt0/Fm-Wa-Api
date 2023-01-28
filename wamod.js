@@ -1,10 +1,6 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
-const port = process.env.PORT || 3000;
-const express = require('express');
-const app = express()
 
-async function mods() {
 	return new Promise((resolve, reject) => {
     const list = []
     axios.get("https://fmmods.com/download-center/mega.php").then(urlResponse => {
@@ -22,13 +18,7 @@ async function mods() {
         result.com_gbwhatsapp = list && list[2] ? list[2] : undefined
         result.com_yowhatsapp = list && list[3] ? list[3] : undefined
         
-        
+        console.log(result)
         resolve(result);
       })
     })
-}
-
-app.get('/', async (req, res) => {
-let dats = await mods()
-        res.send(dats)})
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
